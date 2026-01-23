@@ -1,0 +1,42 @@
+<div class="flex justify-center items-center">
+  <form
+    class="flex flex-col w-1/2 border border-purple-900 shadow-md shadow-purple-300 bg-white rounded-md py-4 px-2"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h2 class="text-xl text-center">Register now!</h2>
+    <div class="flex flex-col space-y-2">
+      <div class="flex flex-col">
+        <label>Email</label>
+        <input
+          class="border border-purple-400 rounded-md p-2"
+          formControlName="email"
+          placeholder="email@example.com"
+          type="text"
+        />
+        @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+          <label class="text-red-600">Please enter a valid email address</label>
+        }
+      </div>
+      <div class="flex flex-col">
+        <label>Password</label>
+        <input
+          class="border border-purple-400 rounded-md p-2"
+          formControlName="password"
+          placeholder="password"
+          type="text"
+        />
+        @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+          <label class="text-yellow-600">Password must be atleast 6 characters long</label>
+        }
+      </div>
+      <button
+        class="bg-purple-700 text-white font-bold rounded-md text-2xl mt-4 p-2"
+        type="submit"
+        [disabled]="registerForm.invalid"
+      >
+        Register
+      </button>
+    </div>
+  </form>
+</div>
