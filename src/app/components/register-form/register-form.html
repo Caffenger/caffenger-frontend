@@ -1,0 +1,24 @@
+<div class="flex justify-center items-center">
+  <form
+    class="flex flex-col w-1/2 rounded-md py-4 px-2 !space-y-3"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h2 class="text-xl text-center">Register now!</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="email@example.com" />
+      @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+        <mat-hint>Invalid email</mat-hint>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="examplepassword123" />
+      @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+        <mat-hint>Password must be atleast 6 characters long</mat-hint>
+      }
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="flex w-fit">Register and SignIn</button>
+  </form>
+</div>
