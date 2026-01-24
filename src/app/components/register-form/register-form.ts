@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../services/auth';
+import { Auth } from '../../services/auth-service/auth';
 
 @Component({
   selector: 'app-register-form',
@@ -27,6 +27,14 @@ export class RegisterForm {
       email: this.registerForm.get('email')?.value as string,
       password: this.registerForm.get('password')?.value as string,
     };
-    if (userData) await this.authService.register(userData);
+    if (userData)
+      (await this.authService.register(userData)).subscribe({
+        next: (response) => {
+          console.log('Registered succesfully', response);
+        },
+        error: (err) => {
+          console.log('Registration failed', err);
+        },
+      });
   }
 }
