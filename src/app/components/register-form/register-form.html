@@ -1,42 +1,24 @@
 <div class="flex justify-center items-center">
   <form
-    class="flex flex-col w-1/2 border border-purple-900 shadow-md shadow-purple-300 bg-white rounded-md py-4 px-2"
+    class="flex flex-col w-1/2 rounded-md py-4 px-2 !space-y-3"
     [formGroup]="registerForm"
     (ngSubmit)="onSubmit()"
   >
     <h2 class="text-xl text-center">Register now!</h2>
-    <div class="flex flex-col space-y-2">
-      <div class="flex flex-col">
-        <label>Email</label>
-        <input
-          class="border border-purple-400 rounded-md p-2"
-          formControlName="email"
-          placeholder="email@example.com"
-          type="text"
-        />
-        @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
-          <label class="text-red-600">Please enter a valid email address</label>
-        }
-      </div>
-      <div class="flex flex-col">
-        <label>Password</label>
-        <input
-          class="border border-purple-400 rounded-md p-2"
-          formControlName="password"
-          placeholder="password"
-          type="text"
-        />
-        @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
-          <label class="text-yellow-600">Password must be atleast 6 characters long</label>
-        }
-      </div>
-      <button
-        class="bg-purple-700 text-white hover:bg-purple-300 transition duration-150 cursor-pointer font-bold rounded-md text-2xl mt-4 p-2"
-        type="submit"
-        [disabled]="registerForm.invalid"
-      >
-        Register
-      </button>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="email@example.com" />
+      @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+        <mat-hint>Invalid email</mat-hint>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="examplepassword123" />
+      @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+        <mat-hint>Password must be atleast 6 characters long</mat-hint>
+      }
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="flex w-fit">Register and SignIn</button>
   </form>
 </div>
